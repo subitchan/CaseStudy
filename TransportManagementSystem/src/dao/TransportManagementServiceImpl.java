@@ -20,6 +20,8 @@ public class TransportManagementServiceImpl implements TransportManagementServic
             ps.setDouble(2, vehicle.getCapacity());
             ps.setString(3, vehicle.getType());
             ps.setString(4, vehicle.getStatus());
+            ps.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,6 +38,8 @@ public class TransportManagementServiceImpl implements TransportManagementServic
             ps.setString(3, vehicle.getType());
             ps.setString(4, vehicle.getStatus());
             ps.setInt(5, vehicle.getVehicleId());
+            ps.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,6 +52,8 @@ public class TransportManagementServiceImpl implements TransportManagementServic
         try (Connection conn = DBConnUtil.getDbConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, vehicleId);
+            ps.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,6 +114,8 @@ public class TransportManagementServiceImpl implements TransportManagementServic
         try (Connection conn = DBConnUtil.getDbConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, tripId);
+            ps.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,6 +130,8 @@ public class TransportManagementServiceImpl implements TransportManagementServic
             ps.setInt(1, tripId);
             ps.setInt(2, passengerId);
             ps.setString(3, bookingDate);
+            ps.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,6 +144,8 @@ public class TransportManagementServiceImpl implements TransportManagementServic
         try (Connection conn = DBConnUtil.getDbConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, bookingId);
+            ps.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -160,9 +172,12 @@ public class TransportManagementServiceImpl implements TransportManagementServic
 		    }
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new BookingNotFoundException("");
+			
 		    
 		}
+        if (bookings.isEmpty()) {
+            throw new BookingNotFoundException("No bookings found for passenger ID: " + passengerId);
+        }
         
 
         return bookings;
@@ -187,8 +202,11 @@ public class TransportManagementServiceImpl implements TransportManagementServic
             }
         } catch (SQLException e) {
         	e.printStackTrace();
-			throw new BookingNotFoundException("");
+		
             
+        }
+        if (bookings.isEmpty()) {
+            throw new BookingNotFoundException("No bookings found for trip ID: " + tripId);
         }
         return bookings;
     }
