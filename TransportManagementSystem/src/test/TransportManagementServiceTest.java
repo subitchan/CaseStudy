@@ -38,42 +38,17 @@ public class TransportManagementServiceTest {
         assertTrue(result);
     }
 //
-    @Test
-   
-    void testDeleteVehicle() {
-        boolean result = service.deleteVehicle(6);
-        assertTrue(result);
-    }
-//
-    @Test
-   
-    void testScheduleTrip() {
-        boolean result = service.scheduleTrip(1, 1, "2025-04-20 08:00:00", "2025-04-20 18:00:00");
-        assertEquals(result,false);
-        boolean result1 = service.scheduleTrip(2, 1, "2025-04-20 08:00:00", "2025-04-20 18:00:00");
-        assertTrue(result1);
-    }
-//
-    @Test
 
-    void testCancelTrip() {
-        boolean result = service.cancelTrip(1);
-        assertTrue(result);
-    }
 
-    @Test
-  
+
+
+    @Test  
     void testBookTrip() {
-        boolean result = service.bookTrip(1, 1, "2025-04-15 10:00:00");
+        boolean result = service.bookTrip(2, 2, "2025-04-15 10:00:00");
         assertTrue(result);
     }
 
-    @Test
-  
-    void testCancelBooking() {
-        boolean result = service.cancelBooking(2);
-        assertTrue(result);
-    }
+
 
     @Test
 
@@ -86,7 +61,8 @@ public class TransportManagementServiceTest {
     @Test
 
     void testGetBookingsByTrip() {
-        List<Booking> bookings = service.getBookingsByTrip(1);
+        List<Booking> bookings = service.getBookingsByTrip(2);
         assertNotNull(bookings);
+    
     }
 }

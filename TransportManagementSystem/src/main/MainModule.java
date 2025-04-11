@@ -1,4 +1,4 @@
-// TransportManagementApp.java with if-else instead of ternary operator
+
 package main;
 
 import dao.*;
